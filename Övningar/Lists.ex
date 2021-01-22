@@ -35,12 +35,20 @@ defmodule Lists do
   def add(x,l) do
 
     [head|tail] = l
-    if head != x or head != [] do
+    if head != x or tail != [] do
       add(x,tail)
+    else
+      if head == x and tail == [] do
+        "Element already in list"
+      end
     end
 
     l ++ [x]
 
+  end
+
+  def append(a,b) do
+    a ++ b
   end
 
 end
