@@ -83,4 +83,27 @@ defmodule Lists do
     reverse(t, [h | r])
   end
 
+  ## Pack([:a,:b,:a,:c,:b,:a]) => [[:a,:a], [:b,:b], [:c]]
+
+  def pack([]) do [] end
+
+  # Pack([:a,:b,:a,:c,:b,:a])
+  def pack([h|t]) do    # h = :a
+    packed = pack(t)    #[[:a,:a], [:b,:b], [:c]]
+    insert(h, packed)   #[[:a,:a,:a], [:b,:b], [:c]]
+  end
+
+  def insert(h,[]) do [[h]] end
+  def insert(h, [ [h|t] | rest]) do
+    # [[:a,:a,:a], [:b,:b], [:c]]
+    [[h, h | t] | rest]
+  end
+
+  #:a [[:a,:a], [:b,:b], [:c]]
+  def insert(h, [first | rest]) do
+    #[[:a,:a,:a], [:b,:b], [:c]]
+    [first | insert(h,rest)]
+
+  end
+
 end

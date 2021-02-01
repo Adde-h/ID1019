@@ -1,10 +1,5 @@
 defmodule Sorting do
 
-  def len([]) do 0 end
-  def len([_|t]) do
-    len(t) + 1
-  end
-
   def insert(e,[]) do [e] end
   def insert(e,[h|t]) do
     if e > h do
@@ -14,8 +9,24 @@ defmodule Sorting do
     end
   end
 
+  def isort([]) do [] end
+
   def isort([h|t]) do
-    insert(h,t)
+    isort([h],t)
+  end
+
+  def isort(sorted,unsorted) do
+    case unsorted do
+      [h|t] -> insert(h, sorted) |> isort(t)
+      [] -> sorted
+    end
+  end
+
+  def msort(l) do #Work In Progress
+    case l do
+      [h|t] ->
+      [head] -> [head]
+    end
   end
 
 end

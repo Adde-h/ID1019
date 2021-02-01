@@ -24,5 +24,4 @@ defmodule Test do
   def area_circle(r) do
     r*r*3.1415
   end
-
 end
