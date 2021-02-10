@@ -12,7 +12,7 @@ defmodule Huff do
   def table(tree) do traverse(tree, [], []) end
 
   def traverse({:leaf, char}, code, table) do [{char, reverse(code)}|table] end
-  
+
   def traverse({:node, left, right}, code, table) do
     traverse(right, [1|code], traverse(left, [0|code], table))
   end

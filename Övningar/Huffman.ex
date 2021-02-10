@@ -24,30 +24,39 @@ defmodule Huffman do
 
   def tree(sample) do
     freq = freq(sample)
-    #huffman(freq)
+    huffman(freq)
   end
 
   def freq(sample) do freq(sample, []) end
-  def freq([], freq) do isort(freq) end
+  def freq([], freq) do freq end
   def freq([char|rest], freq) do freq(rest, count(char, freq)) end
 
   def count(char, []) do [{char, 1}] end
   def count(char, [{char,f}|t]) do [{char,f+1}|t] end
   def count(char, [h|t]) do [h|count(char,t)] end
 
-#  def count(char, [h|t]) do
-#   case h do
-#     [{char, f}] -> [{char, f+1}|t]
-#    _ -> [h|count(char, t)]
-#    end
-#   end
+  #  def count(char, [h|t]) do #Funkar ej?
+  #   case h do
+  #     [{char, f}] -> [{char, f+1}|t]
+  #    _ -> [h|count(char, t)]
+  #    end
+  #   end
 
-  def insert(e,[]) do [e] end
-  def insert({char,f},[{char2,n}|t]) do
+  def huffman(freq) do
+    huff(isort(freq))
+  end
+
+  def huff([{tree, _}]) do tree end
+  def huff([{t1,f1}, {t2,f2}|rest]) do
+    huff(insert({t1, t2}, f1+f2, rest))
+  end
+
+  def insert(e,f,[]) do [{e,f}] end
+  def insert(e,f,[{char,n}|t]) do
     if f > n do
-      [{char2,n}|insert({char,f},t)]
+      [{char,n}|insert(e,f,t)]
     else
-      [{char,f},{char2,n}|t]
+      [{e,f},{char,n}|t]
     end
   end
 
@@ -58,27 +67,25 @@ defmodule Huffman do
 
   def isort(sorted,unsorted) do
     case unsorted do
-      [h|t] -> insert(h, sorted) |> isort(t)
+      [{e,f}|t] -> insert(e,f, sorted) |> isort(t)
       [] -> sorted
     end
   end
 
-  def encode_table(tree) do
+#  def encode_table(tree) do
     # To implement...
-  end
+#  end
 
-  def decode_table(tree) do
+#  def decode_table(tree) do
     # To implement...
-  end
+#  end
 
-  def encode(text, table) do
+#  def encode(text, table) do
     # To implement...
-  end
+#  end
 
-  def decode(seq, tree) do
+#  def decode(seq, tree) do
     # To implement...
-  end
-
-
+#  end
 
 end
