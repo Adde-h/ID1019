@@ -27,8 +27,8 @@ defmodule Eager do
   end
 
   def eval_match({:atm, id}, id, []) do [{:ok, [] }] end
-  def eval_match(:ignore, {:atm, id}, {:atm, id2}) do
-    {:ok, id}
+  def eval_match(:ignore, _, env) do
+    {:ok, env}
   end
 
   def eval_match({:var, str}, id, []) do [{:ok, [{str, id}]}] end
@@ -40,7 +40,7 @@ defmodule Eager do
   def eval_match({:cons, {:var, x}, {:var, x}}, {:cons, {:atm, a}, {:atm, b}}, []) do :fail end
 
   def eval_match({:var, id}, str, env) do
-    case env do
+    case Env.lookup(id) do
       nil ->
         {:ok, ...}
       {_, ^str} ->
