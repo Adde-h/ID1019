@@ -69,12 +69,40 @@ defmodule Q5 do
 
   @type tree() :: :nil | {:node, tree(), tree()} | {:leaf, any()}
 
-  def compact({:node, left, right}) do
-    {:node, compact(left), right})
+  def test() do
+    compact({:node, {:leaf, 4}, {:leaf, 4}})
   end
 
-  def compact({:leaf, num}) do
-    num
+  def test2() do
+    compact({:node, {:leaf, 5}, {:node, :nil, {:leaf, 4}}})
+  end
+
+  def compact (:nil) do :nil end
+
+  def compact({:node, left, right}) do
+   cl = compact(left)
+   cr = compact(right)
+   combine(cl, cr)
+  end
+
+  def compact({:leaf, value}) do
+    {:leaf, value}
+  end
+
+  def combine(:nil, {:leaf, value}) do
+    {:leaf, value}
+  end
+
+  def combine({:leaf, value}, nil) do
+    {:leaf, value}
+  end
+
+  def combine({:leaf, value}, {:leaf, value}) do
+    {:leaf, value}
+  end
+
+  def combine(left, right) do
+    {:node, left, right}
   end
 
 end
