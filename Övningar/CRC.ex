@@ -19,9 +19,9 @@ defmodule CRC do
     gen = generator()
     listlength = Enum.count(list)
     cond do
-      listlength > 4 ->
+      listlength > 3 ->
         xor(list, gen, Enum.count(gen), [])
-      listlength <= 4 ->
+      listlength <= 3 ->
         list
     end
   end
@@ -39,12 +39,21 @@ defmodule CRC do
   end
 
   # Function checking zeros in the beginning and removing them
-  def confirm([h|t]) do
+  def confirm(list) do
     cond do
-      h == 0 -> confirm(t)
-      h == 1 ->
-        startxor([h|t])
+      Enum.count(list) > 3 ->
+        [h|t] = list
+      cond do
+        h == 0 -> confirm(t)
+        h == 1 ->
+          startxor([h|t])
+      end
+
+      Enum.count(list) <= 3 ->
+        list
     end
+
+
   end
 
 end
