@@ -16,7 +16,7 @@ defmodule CRC do
 
   # Selects first 4 bits and XOR them
   def startxor(list) do
-    
+
     gen = generator()
     listlength = Enum.count(list)
 
@@ -45,11 +45,12 @@ defmodule CRC do
     cond do
       Enum.count(list) > 3 ->
         [h|t] = list
-      cond do
-        h == 0 -> confirm(t)
-        h == 1 ->
-          startxor([h|t])
-      end
+        cond do
+          h == 0 ->
+            confirm(t)
+          h == 1 ->
+            startxor([h|t])
+        end
 
       Enum.count(list) <= 3 ->
         list
