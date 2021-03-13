@@ -35,7 +35,6 @@ defmodule CRC do
   def xor([h|t], [h1|t1], n, list) do
     newlist = list ++ [xor(h,h1)]
     xor(t, t1, n-1, newlist)
-
   end
 
   # Function checking zeros in the beginning and removing them
@@ -52,8 +51,6 @@ defmodule CRC do
       Enum.count(list) <= 3 ->
         list
     end
-
-
   end
 
 end
