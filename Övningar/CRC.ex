@@ -16,8 +16,10 @@ defmodule CRC do
 
   # Selects first 4 bits and XOR them
   def startxor(list) do
+    
     gen = generator()
     listlength = Enum.count(list)
+
     cond do
       listlength > 3 ->
         xor(list, gen, Enum.count(gen), [])
@@ -39,6 +41,7 @@ defmodule CRC do
 
   # Function checking zeros in the beginning and removing them
   def confirm(list) do
+
     cond do
       Enum.count(list) > 3 ->
         [h|t] = list
