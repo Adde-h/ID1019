@@ -59,7 +59,6 @@ defmodule Q3 do
   end
 end
 
-
 defmodule Q4 do
 
   @type op() :: :add | :sub
